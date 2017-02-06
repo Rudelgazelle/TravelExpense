@@ -17,6 +17,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/textView"
+            android:text="User Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textAlignment="center"
+            android:textSize="22dp"/>
+
         <EditText
             android:id="@+id/editTextEmail"
             android:inputType="textEmailAddress"
@@ -36,15 +46,15 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/buttonRegister"
-            android:text="Register user"
+            android:id="@+id/buttonSignin"
+            android:text="Signin"
             android:layout_margin="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:text="Already registred? Sign in here"
-            android:id="@+id/textViewSignin"
+            android:text="Dont have an account? Sign up here"
+            android:id="@+id/textViewSignUp"
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
