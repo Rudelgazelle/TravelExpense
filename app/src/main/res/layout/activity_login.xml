@@ -37,9 +37,9 @@
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/editPassword"
+            android:id="@+id/editTextPassword"
             android:inputType="textPassword"
-            android:hint="Enter your password (six figures)"
+            android:hint="Enter your password)"
             android:textSize="15dp"
             android:layout_margin="15dp"
             android:layout_width="match_parent"

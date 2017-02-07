@@ -82,11 +82,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             //user is successfully registered and logged in
                             //we will start the profile activity here
-                            //RIGHT NOW LETS DISPLAY A TOAST ONLY!!!!!!!!!
+                            //RIGHT NOW LETS DISPLAY A TOAST ONLY.
+
+                            progressDialog.dismiss(); // HAB ICH IM NACHHINEIN NOCH EINGEFÜGT!!!!!!!!!!!
+
                             Toast.makeText(MainActivity.this, "Registered successfully",Toast.LENGTH_SHORT).show();
                         }else {
-                            Toast.makeText(MainActivity.this, "Could not register. Please try again.",Toast.LENGTH_SHORT).show();
 
+                            progressDialog.dismiss(); // HAB ICH IM NACHHINEIN NOCH EINGEFÜGT!!!!!!!!!!!
+
+                            Toast.makeText(MainActivity.this, "Could not register. Please try again.",Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
