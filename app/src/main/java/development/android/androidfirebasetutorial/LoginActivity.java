@@ -19,13 +19,16 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
+    //defining views
     private Button buttonSignIn;
     private EditText editTextEmail;
     private EditText editTextPassword;
-    private TextView textViewSignUp;
+    private TextView textViewSignup;
 
+    //firebase auth object
     private FirebaseAuth firebaseAuth;
 
+    //progress dialog
     private ProgressDialog progressDialog;
 
     @Override
@@ -33,40 +36,47 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //getting firebase auth object
         firebaseAuth = FirebaseAuth.getInstance();
 
-        /* Check if the current user is already logged in; if not, log in*/
+        //if the objects getcurrentuser method is not null
+        //means user is already logged in
         if (firebaseAuth.getCurrentUser() != null){
-            //profile activity here
+            //close this activity
+            finish();
+            //opening profile activity
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
         }
 
-        /* Link the views to the Interface objects / Initialize */
+        //initializing views
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
+        textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
 
         progressDialog = new ProgressDialog(this);
 
+        //attaching click listener
         buttonSignIn.setOnClickListener(this);
-        textViewSignUp.setOnClickListener(this);
+        textViewSignup.setOnClickListener(this);
     }
 
-    private void userlogin(){
+    //method for user login
+    private void userLogin(){
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-                /* Check if the strings we want to receive are empty*/
+        /* Check if the strings we want to receive are empty*/
         if (TextUtils.isEmpty(email)){
             // email is empty
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please enter email", Toast.LENGTH_SHORT).show();
             // stopping the function execution
             return;
         }
 
         if (TextUtils.isEmpty(password)){
             //Password is empty
-            Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Please enter a password", Toast.LENGTH_SHORT).show();
             // stopping the function execution
             return;
         }
@@ -75,17 +85,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog.setMessage("Logging in...");
         progressDialog.show();
 
-        /* call method sign in with mail and password by firebaseAuth; Declaration of the FirebaseAuth Instance is placed above*/
+        //logging in the user
         firebaseAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressDialog.dismiss();
 
+                        //if the task is successfull
                         if (task.isSuccessful()){
                             // start the profile activity
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        }else{
+                            // Show message that login was not successful
+                            Toast.makeText(LoginActivity.this,"Wrong Email/Password",Toast.LENGTH_LONG).show();
                         }
-
                     }
                 });
     }
@@ -93,10 +108,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view == buttonSignIn){
-            userlogin();
+            userLogin();
         }
 
-        if (view == textViewSignUp){
+        if (view == textViewSignup){
             finish();
             startActivity(new Intent(this, MainActivity.class));
         }

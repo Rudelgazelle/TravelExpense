@@ -46,7 +46,7 @@
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/buttonRegister"
+            android:id="@+id/buttonSignup"
             android:text="Register user"
             android:layout_margin="15dp"
             android:layout_width="match_parent"

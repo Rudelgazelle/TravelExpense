@@ -1,6 +1,7 @@
 package development.android.androidfirebasetutorial;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,14 +20,15 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
     /*DECLARATION OF variables*/
-    private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
+    private Button buttonSignup;
+
     private TextView textViewSignin;
 
     private ProgressDialog progressDialog; // will be shown during database interactions
 
-    private FirebaseAuth firebaseAuth; // Variable for the Firebase authentication class
+    private FirebaseAuth firebaseAuth; // Difinging Firebase Object
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,23 +38,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         /* Create a new instance of the Firebase Authentication*/
         firebaseAuth = FirebaseAuth.getInstance();
 
-        /* Create a new instance of the progressbar*/
-        progressDialog = new ProgressDialog(this);
+        /* If the current user is logged in show the ProfileActivity*/
+        if (firebaseAuth.getCurrentUser() != null){
+            //close this activity
+            finish();
+            //open profile activity here
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        }
 
-        /* Link the views to the Interface objects */
-        buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        /* initialize views */
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editPassword);
         textViewSignin = (TextView) findViewById(R.id.textViewSignin);
 
-        /* ATTACH OnClickListener TO THE FIELD */
-        buttonRegister.setOnClickListener(this);
+        buttonSignup = (Button) findViewById(R.id.buttonSignup);
+
+        /* Create a new instance of the progressbar*/
+        progressDialog = new ProgressDialog(this);
+
+
+        /* ATTACH OnClickListener TO THE BUTTON */
+        buttonSignup.setOnClickListener(this);
         textViewSignin.setOnClickListener(this);
     }
 
-
     private void registerUser(){
 
+        //getting email and password from edit texts
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -79,20 +91,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        //Check if successful
                         if (task.isSuccessful()) {
                             //user is successfully registered and logged in
                             //we will start the profile activity here
-                            //RIGHT NOW LETS DISPLAY A TOAST ONLY.
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
 
                             progressDialog.dismiss(); // HAB ICH IM NACHHINEIN NOCH EINGEFÜGT!!!!!!!!!!!
-
-                            Toast.makeText(MainActivity.this, "Registered successfully",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this,"Registered successfully",Toast.LENGTH_SHORT).show();
                         }else {
-
-                            progressDialog.dismiss(); // HAB ICH IM NACHHINEIN NOCH EINGEFÜGT!!!!!!!!!!!
-
-                            Toast.makeText(MainActivity.this, "Could not register. Please try again.",Toast.LENGTH_SHORT).show();
+                            //display some message here
+                            Toast.makeText(MainActivity.this,"Could not register. Please try again.",Toast.LENGTH_SHORT).show();
                         }
+                        progressDialog.dismiss();
                     }
                 });
 
@@ -102,14 +114,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-        if (view == buttonRegister){
+        if (view == buttonSignup){
 
             registerUser();
         }
 
         if (view == textViewSignin){
 
-            // Will open login activity here
+            //open login activity when user taps on the already registered textview
+            startActivity(new Intent(this, LoginActivity.class));
 
 
         }
