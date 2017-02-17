@@ -57,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         editTextName = (EditText) findViewById(R.id.editTextName);
         buttonSave = (Button) findViewById(R.id.buttonSave);
 
-        /* If the user is loggen in proceed with this code*/
+        /* If the user is loggend in proceed with this code*/
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //initializing views
