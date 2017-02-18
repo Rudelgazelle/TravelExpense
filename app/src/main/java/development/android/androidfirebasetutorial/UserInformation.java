@@ -1,5 +1,7 @@
 package development.android.androidfirebasetutorial;
 
+import android.preference.PreferenceManager;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -8,10 +10,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-/**
- * Created by lbuer on 08.02.2017.
- */
-
 public class UserInformation {
 
     public String name;
@@ -19,7 +17,6 @@ public class UserInformation {
 
     public String userMail;
     public String userName;
-    public String userName2;
 
     private FirebaseAuth firebaseAuth;
     private DatabaseReference mDatabase;
@@ -38,10 +35,10 @@ public class UserInformation {
     public void getUserData(){
 
         firebaseAuth = firebaseAuth.getInstance();
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        userMail = user.getEmail();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        userMail = currentUser.getEmail();
 
-        mDatabase = FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("name"); // PRÜFEN OB CHILD KORREKT IST!!!!!!!
+        mDatabase = FirebaseDatabase.getInstance().getReference().child(currentUser.getUid()).child("name"); // PRÜFEN OB CHILD KORREKT IST!!!!!!!
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -49,7 +46,6 @@ public class UserInformation {
 
                 //retrieves the value of the datasnapshot and assignes it to String "userMail"
                 userName = dataSnapshot.getValue().toString();
-                userName2 = "Test Name";
             }
 
             @Override

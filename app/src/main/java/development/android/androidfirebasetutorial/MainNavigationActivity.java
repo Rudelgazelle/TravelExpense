@@ -14,7 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +29,8 @@ public class MainNavigationActivity extends AppCompatActivity
     private FirebaseAuth firebaseAuth;
     private TextView textViewDisplayUserMail;
     private TextView textViewDisplayUserName;
+    private Button btnLogout;
+
 
 
     @Override
@@ -37,7 +41,7 @@ public class MainNavigationActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAdd);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,9 +91,30 @@ public class MainNavigationActivity extends AppCompatActivity
             View navHeaderView = navigationView.getHeaderView(0);
             textViewDisplayUserName = (TextView) navHeaderView.findViewById(R.id.tvDisplayUserName);
             textViewDisplayUserMail = (TextView) navHeaderView.findViewById(R.id.tvDisplayUserMail);
+            btnLogout = (Button) navHeaderView.findViewById(R.id.btnLogout);
+
+            //sets onclick listener to Logout button
+            btnLogout.setOnClickListener(new Button.OnClickListener() {
+                public void onClick(View view) {
+                    if (view == btnLogout) {
+                        //logging out the user
+                        firebaseAuth.signOut();
+                        Toast.makeText(MainNavigationActivity.this, "Logout successful", Toast.LENGTH_SHORT).show();
+                        //closing activity
+                        finish();
+                        //starting login activity
+                        startActivity(new Intent(MainNavigationActivity.this, LoginActivity.class));
+                    }
+                }
+            });
 
             textViewDisplayUserName.setText(userInformation.userName);
             textViewDisplayUserMail.setText(userInformation.userMail);
+
+            //if the variable is still empty, then pass a default value
+            if (userInformation.userName == null){
+                userInformation.userName = "Default User";
+            }
         }
 
     }
@@ -150,4 +175,21 @@ public class MainNavigationActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void onClick(View view) {
+
+        //if logout is pressed
+        if (view == btnLogout){
+            //logging out the user
+            firebaseAuth.signOut();
+            Toast.makeText(MainNavigationActivity.this,"Logout successful",Toast.LENGTH_SHORT).show();
+            //closing activity
+            finish();
+            //starting login activity
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+    }
+
+
+
 }

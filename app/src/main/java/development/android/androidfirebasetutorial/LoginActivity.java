@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         //if the task is successfull
                         if (task.isSuccessful()){
+
                             // start the profile activity
                             finish();
                             startActivity(new Intent(getApplicationContext(), MainNavigationActivity.class));
