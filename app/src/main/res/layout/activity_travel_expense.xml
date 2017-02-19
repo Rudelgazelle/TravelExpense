@@ -11,16 +11,6 @@
     tools:context="development.android.androidfirebasetutorial.TravelExpenseActivity">
 
 
-    <Button
-        android:text="Save Data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="154dp"
-        android:id="@+id/btnSave" />
-
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -34,43 +24,82 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="Description:"
+                android:text="Travel-date:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textViewDescr" />
+                android:layout_marginTop="12dp"
+                android:id="@+id/textViewDate" />
 
             <EditText
+                android:id="@+id/editTextDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="enter a description if applicable.."
-                android:textSize="12dp"
-                android:id="@+id/editTextDescr" />
+                android:inputType="date"
+                android:textSize="13dp"
+                android:ems="10"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"/>
 
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:baselineAligned="true">
 
             <TextView
-                android:text="Date:"
+                android:text="Expense Type:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textViewDate" />
+                android:layout_marginTop="26dp"
+                android:id="@+id/textViewExpenseType" />
+
+            <Spinner
+                android:id="@+id/spinnerExpenseType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/btn_dropdown"
+                android:layout_column="1"
+                android:layout_span="3"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:scrollbarSize="12dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:baselineAligned="true">
+
+            <TextView
+                android:text="Expenses"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="12dp"
+                android:id="@+id/textViewExpenseAmount" />
 
             <EditText
-                android:layout_width="match_parent"
+                android:id="@+id/ExpenseAmount"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="date"
+                android:inputType="numberDecimal"
                 android:ems="10"
-                android:id="@+id/editTextDate" />
+                android:textSize="13dp"
+                android:hint="enter the expense amount..."
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:text="€"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="12dp"
+                android:id="@+id/textViewCurrency" />
 
 
         </TableRow>
@@ -80,13 +109,14 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/textViewLocation"
                 android:text="Location:"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:id="@+id/textViewLocation" />
+                android:layout_marginTop="12dp"/>
 
             <EditText
                 android:layout_width="wrap_content"
@@ -94,11 +124,47 @@
                 android:inputType="textPostalAddress"
                 android:ems="10"
                 android:hint="enter your travel location..."
-                android:textSize="12dp"
-                android:id="@+id/editTextLocation" />
+                android:textSize="13dp"
+                android:id="@+id/editTextLocation"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"/>
 
         </TableRow>
-    </TableLayout>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="Description:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/textViewDescr"
+                android:layout_marginTop="12dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="enter a description if applicable.."
+                android:textSize="13dp"
+                android:id="@+id/editTextDescr"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"/>
+
+        </TableRow>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:text="Save Data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_marginTop="30dp"/>
+
+    </TableLayout>
 
 </RelativeLayout>
