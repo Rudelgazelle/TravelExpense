@@ -15,8 +15,7 @@ public class TravelExpenseData {
     public String description;
 
 
-
-    public TravelExpenseData(Date travelDate, String expenseType, Float expenseAmount, String location, String description) {
+    public TravelExpenseData( Date travelDate, String expenseType, Float expenseAmount, String location, String description) {
 
         this.travelDate = travelDate;
         this.expenseType = expenseType;
