@@ -30,7 +30,7 @@ public class MainNavigationActivity extends AppCompatActivity
     private TextView textViewDisplayUserMail;
     private TextView textViewDisplayUserName;
     private Button btnLogout;
-
+    private FloatingActionButton fabAdd;
 
 
     @Override
@@ -41,12 +41,16 @@ public class MainNavigationActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabAdd);
-        fab.setOnClickListener(new View.OnClickListener() {
+        //Initialize floating action button and add onclicklistener
+        fabAdd = (FloatingActionButton) findViewById(R.id.fabAdd);
+        fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                //open TravelExpenseActivity
+                finish();
+                //starting login activity
+                startActivity(new Intent(MainNavigationActivity.this, TravelExpenseActivity.class));
             }
         });
 
