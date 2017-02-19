@@ -1,5 +1,7 @@
 package development.android.androidfirebasetutorial;
 
+import android.content.Intent;
+import android.support.design.internal.NavigationMenuView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -33,6 +35,16 @@ public class TravelExpenseActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
         String travelDate = df.format(calendar.getTime());
         editTextDate.setText(travelDate);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        //Close the activity and go back to main activity
+        finish();
+        startActivity(new Intent(this, MainNavigationActivity.class));
 
     }
 }

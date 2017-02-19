@@ -12,7 +12,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ProfileActivity">
+            <meta-data
+                android:name="android.support.MainNavigationActivity"
+                android:value=".MainNavigationActivity" />
+        </activity>
         <activity
             android:name=".MainNavigationActivity"
             android:label="@string/title_activity_main_navigation"
@@ -24,7 +28,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".UserInformation" />
-        <activity android:name=".TravelExpenseActivity"></activity>
+        <activity android:name=".TravelExpenseActivity">
+            <meta-data
+                android:name="android.support.MainNavigationActivity"
+                android:value=".MainNavigationActivity" />
+        </activity>
     </application>
 
 </manifest>
