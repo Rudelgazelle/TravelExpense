@@ -27,8 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".UserInformation" />
-        <activity android:name=".TravelExpenseActivity">
+
+        <activity android:name=".TravelExpenseActivity"
+            android:parentActivityName=".MainNavigationActivity">
             <meta-data
                 android:name="android.support.MainNavigationActivity"
                 android:value=".MainNavigationActivity" />
