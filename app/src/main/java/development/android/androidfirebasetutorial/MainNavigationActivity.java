@@ -3,6 +3,7 @@ package development.android.androidfirebasetutorial;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Contacts;
+import android.support.annotation.IdRes;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -14,12 +15,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainNavigationActivity extends AppCompatActivity
@@ -32,6 +43,12 @@ public class MainNavigationActivity extends AppCompatActivity
     private Button btnLogout;
     private FloatingActionButton fabAdd;
 
+    private String currentUserID;
+
+    private ListView listViewTravelExpenses;
+
+    //this will hold our collection of TravelExpenseData
+    final List<TravelExpenseData> expenseData = new ArrayList<TravelExpenseData>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,7 +138,53 @@ public class MainNavigationActivity extends AppCompatActivity
             }
         }
 
+        listViewTravelExpenses = (ListView) findViewById(R.id.ListViewTravelExpenses);
+
+        /* Prepare steps to do a data collection of data from database ------------------------------------------------------*/
+
+        //Get the user ID of the current user (Loged In user Account)
+        currentUserID = firebaseAuth.getCurrentUser().getUid();
+
+        // set the database reference to the correct child object (TravelExpenseData)
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        databaseReference = databaseReference.child(currentUserID).child("TravelExpenseData");
+
+        //set a ValueEventlistener to teh database reference that listens if changes are being made to the data
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                //returns a collection of the children under the set database reference
+                    //datasnapshot.getChlidren();
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+
+                // Shake hands with each of the collected childrens
+                //Iterate over the collection of "children" specified above and put it into a variable called "child"
+                for (DataSnapshot child : children ) {
+                        //child.getValue(TravelExpenseData.class); "VOR STRG + ALT +V"
+                    TravelExpenseData travelExpenseData = child.getValue(TravelExpenseData.class);
+
+                    expenseData.add(travelExpenseData);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        //Make an arrayadapter to show your results
+        ArrayAdapter<TravelExpenseData> expenseDataArrayAdapter = new ArrayAdapter<TravelExpenseData>(this, android.R.layout.simple_expandable_list_item_1, expenseData);
+
+        //set the expensedata in the fragment
+        listViewTravelExpenses.setAdapter(expenseDataArrayAdapter);
+
+        // tell the adapter that we changed its data
+        expenseDataArrayAdapter.notifyDataSetChanged();
     }
+
 
     @Override
     public void onBackPressed() {

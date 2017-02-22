@@ -1,5 +1,7 @@
 package development.android.androidfirebasetutorial;
 
+import java.util.List;
+
 public class TravelExpenseData {
 
     public String travelDate;
@@ -8,6 +10,10 @@ public class TravelExpenseData {
     public String location;
     public String description;
 
+
+    public TravelExpenseData(){
+
+    }
 
     public TravelExpenseData( String travelDate, String expenseType, Float expenseAmount, String location, String description) {
 
