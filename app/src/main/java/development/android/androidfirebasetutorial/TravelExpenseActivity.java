@@ -95,7 +95,7 @@ public class TravelExpenseActivity extends AppCompatActivity {
         String description = editTextTravelDescription.getText().toString().trim();
 
         //define object for the class UserInformation
-        TravelExpenseData travelExpenseData = new TravelExpenseData(travelDate, expenseType, expenseAmount, location, description);
+        TravelExpenseData travelExpenseData = new TravelExpenseData(description, expenseAmount, expenseType, location, travelDate);
 
         //Get the unique ID of the logged in user to store data in the Firebase Database
         FirebaseUser user = firebaseAuth.getCurrentUser();

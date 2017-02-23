@@ -13,6 +13,7 @@
     tools:context="development.android.androidfirebasetutorial.MainNavigationActivity"
     tools:showIn="@layout/app_bar_main_navigation">
 
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,11 +1,14 @@
 package development.android.androidfirebasetutorial;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.AttributeSet;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -138,10 +141,9 @@ public class MainNavigationActivity extends AppCompatActivity
             }
         }
 
-        listViewTravelExpenses = (ListView) findViewById(R.id.ListViewTravelExpenses);
-
         /* Prepare steps to do a data collection of data from database ------------------------------------------------------*/
 
+        listViewTravelExpenses = (ListView) findViewById(R.id.ListViewTravelExpenses);
         //Get the user ID of the current user (Loged In user Account)
         currentUserID = firebaseAuth.getCurrentUser().getUid();
 
