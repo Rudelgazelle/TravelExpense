@@ -8,6 +8,8 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.AttributeSet;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -185,6 +187,10 @@ public class MainNavigationActivity extends AppCompatActivity
 
         // tell the adapter that we changed its data
         expenseDataArrayAdapter.notifyDataSetChanged();
+
+        /* NAVIGATION DRAWER: Show a specific fragment as start screen upon loading (IN THIS CASE THE EXPENSEHISTORY FRAGMENT)*/
+        displaySelectedScreen(R.id.nav_ExpenseHistory);
+
     }
 
 
@@ -226,23 +232,36 @@ public class MainNavigationActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        //call the method and parse the id of the selected item
+        displaySelectedScreen(id);
 
-        } else if (id == R.id.nav_slideshow) {
+        return true;
+    }
 
-        } else if (id == R.id.nav_manage) {
+    private void displaySelectedScreen(int id){
 
-        } else if (id == R.id.nav_share) {
+        //Initialize a new instance of fragment
+        Fragment fragment = null;
 
-        } else if (id == R.id.nav_send) {
-
+        //define cases to determine item(navigation) ID // THIS CAN BE EXPANDED WITH FURTHER ITEMS OF THE NAVIGATIONBAR
+        switch (id){
+            case R.id.nav_ExpenseHistory:
+                fragment = new NavigationMenu_ExpenseHistory();
+                break;
         }
 
+        if (fragment != null){
+            //create a FragmentTransaction that changes the displayed fragment // This initaites the screenswitching action
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            //Replace the fragment within the main navigation layout
+            ft.replace(R.id.content_main_navigation, fragment);
+            //commit the changes
+            ft.commit();
+        }
+
+        //the navigation drawer will be closed after selecting an item
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     public void onClick(View view) {
