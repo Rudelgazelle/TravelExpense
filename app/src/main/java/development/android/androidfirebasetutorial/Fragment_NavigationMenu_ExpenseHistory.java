@@ -56,8 +56,6 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        // UNTERHALB IST ALLES NEU!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -71,9 +69,6 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
         }
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        // OBERHALB IST ALLES NEU!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 
         //inflate the fragment layout
         View view = inflater.inflate(R.layout.fragment_navigation_menu__expense_history, container, false);
@@ -86,12 +81,9 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
 
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        // UNTERHALB IST ALLES NEU!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
         /* Prepare steps to do a data collection of data from database ------------------------------------------------------*/
 
-        //Get the user ID of the current user (Loged In user Account)
+        //Get the user ID of the current user (Logged In user Account)
         currentUserID = firebaseAuth.getCurrentUser().getUid();
 
         // set the database reference to the correct child object (TravelExpenseData)
@@ -136,38 +128,6 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
         adapter.notifyDataSetChanged();
 
         return view;
-
-
-        //OBERHALB IST ALLES NEU!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-/*        // wieder Auskommentieren falls das wieder benötigt wird!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        //initialize the listitems object
-        listItems = new ArrayList<>();
-
-        //Nur für den Test
-        float travelamount = 7;
-
-        for (int i = 0; i<10; i++){
-            TravelExpenseData listItem = new TravelExpenseData(
-                    "Description " + (i+1),
-                    travelamount,
-                    "Expense type",
-                    "Location",
-                    "TravelDate"
-            );
-
-            //Add these listitems to the list
-            listItems.add(listItem);
-        }
-
-        // Instanciate a new adapter for the Recycleview and parse the "listitem" and "Context"
-        adapter = new Adapter_for_RecyclerView_ExpenseHistory(listItems, getContext());
-        //set the adapter to the recyclerview
-        recyclerView.setAdapter(adapter);
-
-        return view;*/
     }
 
 

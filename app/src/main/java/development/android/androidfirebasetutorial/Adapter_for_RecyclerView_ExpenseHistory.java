@@ -58,7 +58,6 @@ public class Adapter_for_RecyclerView_ExpenseHistory extends RecyclerView.Adapte
 
             }
         });
-
     }
 
     //returns the number of items covered in the List
