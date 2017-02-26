@@ -1,16 +1,10 @@
 package development.android.androidfirebasetutorial;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Contacts;
-import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.AttributeSet;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -246,7 +239,7 @@ public class MainNavigationActivity extends AppCompatActivity
         //define cases to determine item(navigation) ID // THIS CAN BE EXPANDED WITH FURTHER ITEMS OF THE NAVIGATIONBAR
         switch (id){
             case R.id.nav_ExpenseHistory:
-                fragment = new NavigationMenu_ExpenseHistory();
+                fragment = new Fragment_NavigationMenu_ExpenseHistory();
                 break;
         }
 
