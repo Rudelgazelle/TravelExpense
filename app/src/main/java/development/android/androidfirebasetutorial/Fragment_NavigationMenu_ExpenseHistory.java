@@ -22,13 +22,13 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
-    private List<ListItem_model_for_RecyclerView_ExpenseHistory> listItems;
+    private List<TravelExpenseData> listItems;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //the the header noame in actionbar
+        //the the header name in actionbar
         getActivity().setTitle("Expense History");
 
         //map the Recyclerview object to the xml RecyclerView
@@ -49,11 +49,16 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
         //initialize the listitems object
         listItems = new ArrayList<>();
 
+        //Nur für den Test
+        float travelamount = 7;
+
         for (int i = 0; i<10; i++){
-            ListItem_model_for_RecyclerView_ExpenseHistory listItem = new ListItem_model_for_RecyclerView_ExpenseHistory(
-                    "Location " + (i+1),
-                    "Date",
-                    "Description"
+            TravelExpenseData listItem = new TravelExpenseData(
+                    "Description " + (i+1),
+                    travelamount,
+                    "Expense type",
+                    "Location",
+                    "TravelDate"
             );
 
             //Add these listitems to the list

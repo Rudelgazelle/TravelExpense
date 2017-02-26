@@ -16,11 +16,11 @@ import java.util.List;
     // 1- implement methods by pressing alt + enter
 public class Adapter_for_RecyclerView_ExpenseHistory extends RecyclerView.Adapter<Adapter_for_RecyclerView_ExpenseHistory.Viewholder>{
 
-    private List<ListItem_model_for_RecyclerView_ExpenseHistory> listitems;
+    private List<TravelExpenseData> listitems;
     private Context context;
 
     //Create a constructor for List and context
-    public Adapter_for_RecyclerView_ExpenseHistory(List<ListItem_model_for_RecyclerView_ExpenseHistory> listitems, Context context) {
+    public Adapter_for_RecyclerView_ExpenseHistory(List<TravelExpenseData> listitems, Context context) {
         this.listitems = listitems;
         this.context = context;
     }
@@ -39,10 +39,10 @@ public class Adapter_for_RecyclerView_ExpenseHistory extends RecyclerView.Adapte
     @Override
     public void onBindViewHolder(Viewholder holder, int position) {
         //Gets the specific position of the list item
-        ListItem_model_for_RecyclerView_ExpenseHistory listItem = listitems.get(position);
+        TravelExpenseData listItem = listitems.get(position);
         //Sets the ilist items to the specific view object
         holder.textViewLocation.setText(listItem.getLocation());
-        holder.textViewTravelDate.setText(listItem.getTraveldate());
+        holder.textViewTravelDate.setText(listItem.getTravelDate());
         holder.textViewDescription.setText(listItem.getDescription());
     }
 
