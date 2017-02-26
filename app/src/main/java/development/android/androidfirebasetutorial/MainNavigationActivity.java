@@ -34,7 +34,7 @@ import java.util.List;
 public class MainNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //firebase auth object
+    //Firebase auth object
     private FirebaseAuth firebaseAuth;
     private TextView textViewDisplayUserMail;
     private TextView textViewDisplayUserName;
