@@ -40,7 +40,7 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
         //inflate the fragment layout
         View view = inflater.inflate(R.layout.fragment_navigation_menu__expense_history, container, false);
 
-        //Initiate the RecyclerView obejct
+        //Initiate the RecyclerView object
         recyclerView = (RecyclerView)view.findViewById(R.id.RecyclerViewExpenseHistory);
         //Every item of the recyclerview will have a fixed size
         recyclerView.setHasFixedSize(true);
