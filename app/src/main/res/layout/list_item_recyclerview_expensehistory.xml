@@ -3,12 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <!-- Each item of the RecyclerView will contain a cardview holding the TExtView items  -->
+    <!-- Each item of the RecyclerView will contain a cardview holding the TextView items  -->
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/CardViewLinearLayout"
             android:padding="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

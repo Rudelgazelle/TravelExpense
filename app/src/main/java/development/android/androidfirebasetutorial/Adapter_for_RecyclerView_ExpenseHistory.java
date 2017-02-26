@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,11 +41,24 @@ public class Adapter_for_RecyclerView_ExpenseHistory extends RecyclerView.Adapte
     @Override
     public void onBindViewHolder(Viewholder holder, int position) {
         //Gets the specific position of the list item
-        TravelExpenseData listItem = listitems.get(position);
+        final TravelExpenseData listItem = listitems.get(position);
         //Sets the ilist items to the specific view object
         holder.textViewLocation.setText(listItem.getLocation());
         holder.textViewTravelDate.setText(listItem.getTravelDate());
         holder.textViewDescription.setText(listItem.getDescription());
+
+        //initialize linear layout and attach OnClickListener to enable item click
+        //whenever an Item with the position "position" is clicked, this method is being executed
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //As an example a toast object will be called to show a toast whenever an item is being clicked
+                Toast.makeText(context, "you clicked Item "+ listItem.getLocation(), Toast.LENGTH_LONG).show();
+
+            }
+        });
+
     }
 
     //returns the number of items covered in the List
@@ -60,12 +75,17 @@ public class Adapter_for_RecyclerView_ExpenseHistory extends RecyclerView.Adapte
         public TextView textViewTravelDate;
         public TextView textViewDescription;
 
+        //Define a Linear Layout to enable item click
+        public LinearLayout linearLayout;
+
         public Viewholder(View itemView) {
             super(itemView);
 
             textViewLocation = (TextView) itemView.findViewById(R.id.tvLocation);
             textViewTravelDate = (TextView) itemView.findViewById(R.id.tvTravelDate);
             textViewDescription = (TextView) itemView.findViewById(R.id.tvDescription);
+
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.CardViewLinearLayout);
         }
     }
 
