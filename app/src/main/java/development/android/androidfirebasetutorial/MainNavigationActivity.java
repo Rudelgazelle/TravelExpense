@@ -75,7 +75,7 @@ public class MainNavigationActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        //--------------------------------------------------------------------------------------
+        //--------------------------------// ES KÖNNTE SEIN, DASS DIESE METHODE FÜR DIE USRDATEN ZU SPÄT ABGEFRAGT WIRD UND DESHALB IMMER BEIM START DIER ERROR KOMMT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
