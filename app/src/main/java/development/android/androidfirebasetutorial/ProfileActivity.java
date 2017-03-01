@@ -29,8 +29,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private Button buttonSave;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,10 +92,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         //Show message that the information was saved
         Toast.makeText(this, "Information Saved...", Toast.LENGTH_LONG).show();
-
-
-
     }
+
 
     @Override
     public void onClick(View view) {
@@ -117,7 +113,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (view == buttonSave){
             // call the method SaveUSerInformation
             SaveUserInformation();
-
         }
 
     }

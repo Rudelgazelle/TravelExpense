@@ -14,11 +14,12 @@
     tools:showIn="@layout/app_bar_main_navigation">
 
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:text="MainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/ListViewTravelExpenses" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="203dp"
+        android:id="@+id/textView2" />
 </RelativeLayout>

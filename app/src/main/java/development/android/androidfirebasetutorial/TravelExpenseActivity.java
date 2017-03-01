@@ -39,7 +39,6 @@ public class TravelExpenseActivity extends AppCompatActivity {
     //Database Objects
     private DatabaseReference databaseReference;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

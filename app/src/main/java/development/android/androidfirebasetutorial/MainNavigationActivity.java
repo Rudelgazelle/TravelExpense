@@ -51,13 +51,6 @@ public class MainNavigationActivity extends AppCompatActivity
     private Button btnLogout;
     private FloatingActionButton fabAdd;
 
-    private String currentUserID;
-
-    private ListView listViewTravelExpenses;
-
-    //this will hold our collection of TravelExpenseData
-    final List<TravelExpenseData> expenseData = new ArrayList<TravelExpenseData>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,60 +156,9 @@ public class MainNavigationActivity extends AppCompatActivity
             textViewDisplayUserName.setText(userInformation.userName);
             textViewDisplayUserMail.setText(userInformation.userMail);
 
-            //if the variable is still empty, then pass a default value
-            if (userInformation.userName == null){
-                userInformation.userName = "Default User";
-            }
+            /* NAVIGATION DRAWER: Show a specific fragment as start screen upon loading (IN THIS CASE THE EXPENSEHISTORY FRAGMENT)*/
+            displaySelectedScreen(R.id.nav_ExpenseHistory);
         }
-
-        /* Prepare steps to do a data collection of data from database ------------------------------------------------------*/
-
-        listViewTravelExpenses = (ListView) findViewById(R.id.ListViewTravelExpenses);
-        //Get the user ID of the current user (Loged In user Account)
-        currentUserID = firebaseAuth.getCurrentUser().getUid();
-
-        // set the database reference to the correct child object (TravelExpenseData)
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = database.getReference();
-        databaseReference = databaseReference.child(currentUserID).child("TravelExpenseData");
-
-        //set a ValueEventlistener to teh database reference that listens if changes are being made to the data
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                //returns a collection of the children under the set database reference
-                    //datasnapshot.getChlidren();
-                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
-
-                // Shake hands with each of the collected childrens
-                //Iterate over the collection of "children" specified above and put it into a variable called "child"
-                for (DataSnapshot child : children ) {
-                        //child.getValue(TravelExpenseData.class); "VOR STRG + ALT +V"
-                    TravelExpenseData travelExpenseData = child.getValue(TravelExpenseData.class);
-
-                    expenseData.add(travelExpenseData);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        //Make an arrayadapter to show your results
-        ArrayAdapter<TravelExpenseData> expenseDataArrayAdapter = new ArrayAdapter<TravelExpenseData>(this, android.R.layout.simple_expandable_list_item_1, expenseData);
-
-        //set the expensedata in the fragment
-        listViewTravelExpenses.setAdapter(expenseDataArrayAdapter);
-
-        // tell the adapter that we changed its data
-        expenseDataArrayAdapter.notifyDataSetChanged();
-
-        /* NAVIGATION DRAWER: Show a specific fragment as start screen upon loading (IN THIS CASE THE EXPENSEHISTORY FRAGMENT)*/
-        displaySelectedScreen(R.id.nav_ExpenseHistory);
-
     }
 
 
@@ -277,7 +219,7 @@ public class MainNavigationActivity extends AppCompatActivity
         }
 
         if (fragment != null){
-            //create a FragmentTransaction that changes the displayed fragment // This initaites the screenswitching action
+            //create a FragmentTransaction that changes the displayed fragment // This initiates the screenswitching action
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             //Replace the fragment within the main navigation layout
             ft.replace(R.id.content_main_navigation, fragment);

@@ -1,6 +1,7 @@
 package development.android.androidfirebasetutorial;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,18 +29,15 @@ import java.util.List;
 public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
 
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
 
     private List<TravelExpenseData> listItems;
 
-    //NEU ______________________________________________________________________________________________________________________
-
-    private String currentUserID;
-
     //Firebase auth object
+    private String currentUserID;
     private FirebaseAuth firebaseAuth;
 
-    //___________________________________________________________________________________________________________________________
+    private ProgressDialog progressDialog;
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -47,13 +45,35 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
 
         //the the header name in actionbar
         getActivity().setTitle("Expense History");
-
-        //map the Recyclerview object to the xml RecyclerView
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        //inflate the fragment layout
+        View fragmentView = inflater.inflate(R.layout.fragment_navigation_menu__expense_history, container, false);
+
+        //Initiate the RecyclerView object //map the Recyclerview object to the xml RecyclerView
+        recyclerView = (RecyclerView)fragmentView.findViewById(R.id.RecyclerViewExpenseHistory);
+        //Every item of the recyclerview will have a fixed size
+        //recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        //Fill the recycleview with data from firebase
+        updateRecycleView();
+
+        return fragmentView;
+    }
+
+    private void updateRecycleView(){
+        //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        // Show progress bar to indicate data transfer
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Retrieving data...");
+        progressDialog.show();
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         //initializing firebase authentication object
@@ -68,19 +88,6 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
             startActivity(new Intent(getContext(), LoginActivity.class));
         }
 
-        //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-        //inflate the fragment layout
-        View view = inflater.inflate(R.layout.fragment_navigation_menu__expense_history, container, false);
-
-        //Initiate the RecyclerView object
-        recyclerView = (RecyclerView)view.findViewById(R.id.RecyclerViewExpenseHistory);
-        //Every item of the recyclerview will have a fixed size
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-        //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         /* Prepare steps to do a data collection of data from database ------------------------------------------------------*/
 
         //Get the user ID of the current user (Logged In user Account)
@@ -111,7 +118,18 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
                     //add the retrieved data to the ArrayList
                     listItems.add(travelExpenseData);
                 }
+
+                // Instanciate a new adapter for the Recycleview and parse the "listitem" and "Context"
+                final Adapter_for_RecyclerView_ExpenseHistory adapter = new Adapter_for_RecyclerView_ExpenseHistory(listItems, getContext());
+
+                //set the adapter to the recyclerview
+                recyclerView.setAdapter(adapter);
+
+                // notify the adapter that data has been changed and needs to be refreshed
+                //adapter.notifyDataSetChanged();
             }
+
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -119,15 +137,8 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
             }
         });
 
-        // Instanciate a new adapter for the Recycleview and parse the "listitem" and "Context"
-        adapter = new Adapter_for_RecyclerView_ExpenseHistory(listItems, getContext());
-        //set the adapter to the recyclerview
-        recyclerView.setAdapter(adapter);
-
-        // notify the adapter that data has been changed and needs to be refreshed
-        adapter.notifyDataSetChanged();
-
-        return view;
+        //Deflate progress bar
+        progressDialog.dismiss();
     }
 
 
