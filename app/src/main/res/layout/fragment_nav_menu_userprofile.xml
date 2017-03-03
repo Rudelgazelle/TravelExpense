@@ -1,0 +1,62 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="development.android.androidfirebasetutorial.Fragment_NavMenu_UserProfile">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:text="Set a username for the mail listed below and click on 'Save profile' to update your user profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:id="@+id/textViewInfo" />
+
+        <TextView
+            android:text="Enter a user name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewUserName" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="enter your name..."
+            android:ems="10"
+            android:id="@+id/editTextUserName" />
+
+        <TextView
+            android:text="Registred mail account:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/textViewUserMailHeader" />
+
+        <TextView
+            android:text="UserMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/textViewUserMail"
+            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+        <Button
+            android:text="Save profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:id="@+id/buttonSaveProfile" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

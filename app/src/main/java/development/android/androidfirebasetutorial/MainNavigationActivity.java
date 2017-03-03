@@ -2,7 +2,6 @@ package development.android.androidfirebasetutorial;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -18,9 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,20 +26,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private static final String TAG = "myTAG";
 
     //Firebase auth object
     private FirebaseAuth firebaseAuth;
@@ -78,8 +65,6 @@ public class MainNavigationActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        //--------------------------------// ES KÖNNTE SEIN, DASS DIESE METHODE FÜR DIE USRDATEN ZU SPÄT ABGEFRAGT WIRD UND DESHALB IMMER BEIM START DIER ERROR KOMMT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
         //initializing firebase authentication object
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -96,34 +81,6 @@ public class MainNavigationActivity extends AppCompatActivity
 
         if (firebaseAuth.getCurrentUser() != null) {
             //*User is logged in*//*
-
-
-            //----------------------------------------------------------------------------------------------------------------------------------------------------------
-            // UPDATE USER PROFILE DATA FÜR TESTZWECKE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Diese METHODE KANN NOCH SEPERAT IN EINER NEUEN AKTIVITÄT "Userprofile" gelistet werden!!!! MUSS NICHT JEDES MAL AUSGEFÜHRT WERDEN
-            //----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-            //Get the current User
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-            //request a change for Username and profile picture
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName("Lars Bürkner")
-                    .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                    .build();
-
-            //update the changes requested above
-            user.updateProfile(profileUpdates)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d(TAG, "User profile updated.");
-                            }
-                        }
-                    });
-
-            //----------------------------------------------------------------------------------------------------------------------------------------------------------
-            //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
             UserInformation userInformation = new UserInformation();
             userInformation.getUserData();
@@ -214,7 +171,10 @@ public class MainNavigationActivity extends AppCompatActivity
         //define cases to determine item(navigation) ID // THIS CAN BE EXPANDED WITH FURTHER ITEMS OF THE NAVIGATIONBAR
         switch (id){
             case R.id.nav_ExpenseHistory:
-                fragment = new Fragment_NavigationMenu_ExpenseHistory();
+                fragment = new Fragment_NavMenu_ExpenseHistory();
+                break;
+            case R.id.nav_UserProfile:
+                fragment = new Fragment_NavMenu_UserProfile();
                 break;
         }
 

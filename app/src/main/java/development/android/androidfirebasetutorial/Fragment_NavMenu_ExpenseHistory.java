@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
+public class Fragment_NavMenu_ExpenseHistory extends Fragment {
 
     private RecyclerView recyclerView;
 
@@ -53,7 +53,7 @@ public class Fragment_NavigationMenu_ExpenseHistory extends Fragment {
 
         //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         //inflate the fragment layout
-        View fragmentView = inflater.inflate(R.layout.fragment_navigation_menu__expense_history, container, false);
+        View fragmentView = inflater.inflate(R.layout.fragment_nav_menu_expensehistory, container, false);
 
         //Initiate the RecyclerView object //map the Recyclerview object to the xml RecyclerView
         recyclerView = (RecyclerView)fragmentView.findViewById(R.id.RecyclerViewExpenseHistory);
