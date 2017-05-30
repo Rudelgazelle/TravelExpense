@@ -173,6 +173,9 @@ public class MainNavigationActivity extends AppCompatActivity
             case R.id.nav_ExpenseHistory:
                 fragment = new Fragment_NavMenu_ExpenseHistory();
                 break;
+            case R.id.nav_ReceiptGallery:
+                fragment = new Fragment_NavMenu_ReceiptGallery();
+                break;
             case R.id.nav_UserProfile:
                 fragment = new Fragment_NavMenu_UserProfile();
                 break;
